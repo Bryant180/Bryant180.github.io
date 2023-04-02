@@ -12,8 +12,13 @@ let vy = 0
 
 function update() {
     console.log(grounded)
-    ctx.clearRect(0, 0, canvas.width, canvas.height)
+    let vyAbs = Math.abs(vy)
+    let minErase = 1
+
+    ctx.clearRect(x, y, 50, -vyAbs - minErase)
+    ctx.clearRect(x, y, 50, 50 + vyAbs + minErase)
     y += vy
+    ctx.fillStyle = "blue";
     ctx.fillRect(x, y, 50, 50)
     collision()
     requestAnimationFrame(update)
