@@ -5,33 +5,27 @@ const ctx = canvas.getContext("2d")
 
 const moose = document.getElementById("moose")
 
-//ctx.drawImage(moose, 0, canvas.height - 100, 100, 100)
 
-/*
-let x = 100
-let y = canvas.height - 50
-*/
-
-let x = 150
-let y = canvas.height
+let playerPosX = 150
+let playerPosY = canvas.height
 
 let grounded = false
 
-let vy = 0
+let playerVelocity = 0
 
 
 function update() {
     console.log(grounded)
-    let vyAbs = Math.abs(vy)
+    let vyAbs = Math.abs(playerVelocity)
     let minErase = 1
 
-    ctx.clearRect(x, y, 100, -vyAbs - minErase)
-    ctx.clearRect(x, y, 100, 100 + vyAbs + minErase)
-    y += vy
+    ctx.clearRect(playerPosX, playerPosY, 100, -vyAbs - minErase)
+    ctx.clearRect(playerPosX, playerPosY, 100, 100 + vyAbs + minErase)
+    playerPosY += playerVelocity
 
     fillBackground()
 
-    ctx.drawImage(moose, x, y, 100, 100)
+    ctx.drawImage(moose, playerPosX, playerPosY, 100, 100)
     collision()
     requestAnimationFrame(update)
 }
@@ -39,20 +33,20 @@ function update() {
 update()
 
 function fillBackground() {
-    ctx.fillStyle = "blue";
+    ctx.fillStyle = "lightblue";
     ctx.fillRect(0, 0, canvas.width, canvas.height)
 }
 
-function fillBlue(x, y, width, height) {
-    ctx.fillStyle = "blue";
-    ctx.fillRect(x, y, width, height)
+function fillBlue(moosePosX, moosePosY, width, height) {
+    ctx.fillStyle = "lightblue";
+    ctx.fillRect(moosePosX, moosePosY, width, height)
 }
 
 
 function collision() {
-    if (y >= canvas.height - 100) {
-        y = canvas.height - 100
-        vy = 0
+    if (playerPosY >= canvas.height - 100) {
+        playerPosY = canvas.height - 100
+     playerVelocity = 0
         grounded = true
     }
 }
@@ -60,7 +54,7 @@ function collision() {
 setInterval(function Gravity() 
 {
     if (!grounded) {
-        vy += .1
+     playerVelocity += .1
     }
     
 })

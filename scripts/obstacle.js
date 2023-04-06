@@ -27,5 +27,8 @@ function updateObstaclePos() {
         ctx.fillRect(obsX, obsY, 50, 50)
         requestAnimationFrame(updateObstaclePos)
     }
-    
+}
+
+function checkCollisionWithPlayer(playerX, playerY, playerW, PlayerH, obX, obY, obW, obH) {
+    // Checks for collision and if collision occurs will call function terminating player
 }
