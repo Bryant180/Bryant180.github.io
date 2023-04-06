@@ -16,6 +16,7 @@ setInterval(function Obstacle()
     }
     console.log("object")
     ctx.fillRect(spawnX, spawnY, obsSizeX, obsSizeY)
+    obstacleSpeed += 1
     obsX = spawnX
     obsY = spawnY
     updateObstaclePos()
