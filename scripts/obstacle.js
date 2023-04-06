@@ -1,4 +1,4 @@
-let spawnX = canvas.width - 50
+let spawnX = canvas.width
 let spawnY = canvas.height - 50
 
 let obsX = 0
@@ -17,8 +17,12 @@ setInterval(function Obstacle()
 
 function updateObstaclePos() {
     if (obsX >= -50) {
-        ctx.clearRect(obsX, obsY, 50 + obstacleSpeed, 50)
+        fillBlue(obsX, obsY, 50 + obstacleSpeed, 50)
+        //ctx.clearRect(obsX, obsY, 50 + obstacleSpeed, 50)
         obsX -= obstacleSpeed
+
+        
+
         ctx.fillStyle = "red";
         ctx.fillRect(obsX, obsY, 50, 50)
         requestAnimationFrame(updateObstaclePos)
