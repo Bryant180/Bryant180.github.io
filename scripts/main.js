@@ -9,6 +9,11 @@ const moose = document.getElementById("moose")
 let playerPosX = 150
 let playerPosY = canvas.height
 
+const playerSizeX = 100
+const playerSizeY = 100
+
+playerDead = false
+
 let grounded = false
 
 let playerVelocity = 0
@@ -19,15 +24,22 @@ function update() {
     let vyAbs = Math.abs(playerVelocity)
     let minErase = 1
 
-    ctx.clearRect(playerPosX, playerPosY, 100, -vyAbs - minErase)
-    ctx.clearRect(playerPosX, playerPosY, 100, 100 + vyAbs + minErase)
+    ctx.clearRect(playerPosX, playerPosY, playerSizeX, -vyAbs - minErase)
+    ctx.clearRect(playerPosX, playerPosY, playerSizeX, playerSizeY + vyAbs + minErase)
+
     playerPosY += playerVelocity
 
     fillBackground()
 
-    ctx.drawImage(moose, playerPosX, playerPosY, 100, 100)
+    if (playerDead == true) {
+        
+        return
+    }
+
+    ctx.drawImage(moose, playerPosX, playerPosY, playerSizeX, playerSizeY)
     collision()
     requestAnimationFrame(update)
+
 }
 
 update()
@@ -44,8 +56,8 @@ function fillBlue(moosePosX, moosePosY, width, height) {
 
 
 function collision() {
-    if (playerPosY >= canvas.height - 100) {
-        playerPosY = canvas.height - 100
+    if (playerPosY >= canvas.height - playerSizeY) {
+        playerPosY = canvas.height - playerSizeY
      playerVelocity = 0
         grounded = true
     }
